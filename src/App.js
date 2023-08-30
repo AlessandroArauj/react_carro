@@ -1,23 +1,89 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='pagina'>
+        <section className='canto'>
+
+          <img src='../assets/img/logo.svg' />
+          <h1></h1>
+
+
+          <div className='pages'>
+
+            <div>
+              <img src='../assets/img/home.svg' />
+              <h1> HOME</h1>
+            </div>
+
+            <div>
+              <img src='../assets/img/Vector.svg' />
+              <h1> CLIENTE</h1>
+            </div>
+
+            <div>
+              <img src='../assets/img/car.svg' />
+              <h1>VEICULOS</h1>
+            </div>
+
+            <div>
+              <img src='../assets/img/key.svg' />
+              <h1>LOCAÇÂO</h1>
+            </div>
+
+          </div>
+        </section>
+
+        <section className=' conteudo'>
+
+          <header className='cabe'>
+            <h1>
+              Olá, que bom voce voltou!!
+            </h1>
+            <img src='' />
+          </header>
+
+          <section className='baixo'>
+
+            <p>ÁREA ADMNISTRATIVA</p>
+            <h1>Controle de Clientes</h1>
+
+            <div className=' novo_cliente'>
+              <h1></h1>
+
+              <div className='input'>
+                <h1>NOME</h1>
+                <input type='text' />
+              </div>
+
+              <div className='input'>
+                <h1>EMAIL</h1>
+                <input type='text' />
+              </div>
+
+              <div className='input'>
+                <h1>TELEFONE</h1>
+                <input type='text' />
+              </div>
+
+              <div className='input'>
+                <h1>CPF</h1>
+                <input type='text' />
+              </div>
+
+              <div className='input'>
+                <h1>CNH</h1>
+                <input type='text' />
+              </div>
+
+
+              <button> salvar </button>
+            </div>
+
+          </section>
+        </section>
+      </div>
     </div>
   );
 }
