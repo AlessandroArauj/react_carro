@@ -14,7 +14,7 @@
   }
 
   .canto{
-    height: 100vh;
+    min-height: 100%;
     width: 250px;
     background-color: #000;
     display: flex;
@@ -81,7 +81,7 @@
   align-items: center;
   gap: 13px;
   flex-direction: column;
-  padding: 12px;
+  padding: 35px;
 
 
  }
@@ -99,7 +99,7 @@
 
  }
 
- .novo_cliente{
+ .cubo{
   padding: 40px;
  
   height: 514px;
@@ -130,12 +130,12 @@
   width: 300px;
  }
 
- .novo_cliente > h1{
+ .cubo > h1{
   font-size: 24px;
   padding: 10px 0px;
  }
 
- .novo_cliente button{
+ .cubo button{
   width: 100px;
   height: 36px;
   font-size: 12px;
@@ -145,7 +145,7 @@
   border: none;
  }
  
- .novo_cliente button:hover{
+ .cubo button:hover{
    width: 120px;
    
 
@@ -153,7 +153,28 @@
 
  }
 
+ .input2{
+  border: #747474 solid 1px;
+  outline: 0;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+ }
 
+ .input2 input{
+  border: none;
+  outline: 0;
+ }
+
+ .input2 h1{
+  font-size: 10px;
+  color: #747474;
+ }
+
+ 
 
 
 }

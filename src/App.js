@@ -48,9 +48,9 @@ function App() {
 
             <p>ÁREA ADMNISTRATIVA</p>
             <h1>Controle de Clientes</h1>
-            
-          
-            <div className='novo_cliente'>
+
+
+            <div className='cubo'>
               <h1>Novo Cliente</h1>
 
               <div className='input'>
@@ -81,6 +81,23 @@ function App() {
 
               <button> Salvar </button>
             </div>
+
+
+            <div className='cubo'>
+              <h1>Lista de Clientes</h1>
+              <div className='input2'>
+                <div>
+                  <h1>Nome</h1>
+                  <input type='text' />
+                </div>
+
+                <img src='../assets/img/busca.svg' />
+
+              </div>
+
+            </div>
+
+
 
           </section>
         </section>
