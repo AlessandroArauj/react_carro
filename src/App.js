@@ -1,6 +1,33 @@
+import { useState, useEffect } from 'react';
 import './App.scss';
+import axios from 'axios';
 
 function App() {
+  const [tipos, setTipos] = useState([]);
+
+  const [tipoSelecionado, setSelecionado] = useState(0);
+  const [modelos, setModelos] = useState('');
+  const [marca, setMarca] = useState('');
+  const [placa, setPlaca] = useState('');
+  const [ano, setAno] = useState('');
+
+  const [erro, setErro] = useState('');
+
+
+  async function listarTipos() {
+      let r = await axios.get('http://localhost:5000/veiculo/tipo');
+      setTipos(r.data);
+
+  }
+
+  useEffect(() => {
+    //
+    listarTipos();
+  }, [])
+
+
+  
+
   return (
     <div className="App">
       <div className='pagina'>
@@ -51,11 +78,17 @@ function App() {
 
 
             <div className='cubo'>
-              <h1>Novo Cliente</h1>
+              <h1>Novo Veiculo</h1>
 
               <div className='input'>
-                <h1>NOME</h1>
-                <input type='text' />
+                <h1>Tipo</h1>
+                <select id='veiculo' name='veiculo' value={tipoSelecionado} onChange={e => setSelecionado(e.target.value)}>
+                  <option value={0}> Selecione </option>
+                  {tipos.map(item =>
+                    
+                      <option value={item.id}> {item.tipo} </option>
+                    )}
+                </select>
               </div>
 
               <div className='input'>
