@@ -48,9 +48,10 @@ function App() {
 
             <p>ÁREA ADMNISTRATIVA</p>
             <h1>Controle de Clientes</h1>
-
-            <div className=' novo_cliente'>
-              <h1></h1>
+            
+          
+            <div className='novo_cliente'>
+              <h1>Novo Cliente</h1>
 
               <div className='input'>
                 <h1>NOME</h1>
@@ -78,7 +79,7 @@ function App() {
               </div>
 
 
-              <button> salvar </button>
+              <button> Salvar </button>
             </div>
 
           </section>
