@@ -10,15 +10,75 @@ function App() {
   const [marca, setMarca] = useState('');
   const [placa, setPlaca] = useState('');
   const [ano, setAno] = useState('');
+  const [id, setId] = useState(0);
 
   const [erro, setErro] = useState('');
 
 
-  async function listarTipos() {
-      let r = await axios.get('http://localhost:5000/veiculo/tipo');
-      setTipos(r.data);
+  async function removerVeiculo(id) {
+    let r = await axios.delete('http://localhost:5000/veiculo' + id)
+    alert('veiculo foi excluido')
+
+    buscarVeiculos()
+  }
+
+  function alterVeiculo(item) {
+    setModelos(item.modelos);
+    setPlaca(item.placa);
+    setAno(item.ano);
+    setMarca(item.marca);
+    setSelecionado(item.idTipoSelecionado);
+    setId(item.id)
 
   }
+
+  async function listarTipos() {
+    let r = await axios.get('http://localhost:5000/veiculo/tipo');
+    setTipos(r.data);
+
+  }
+
+  async function Salvar() {
+    try {
+      let Veiculos = {
+        idTipoSelecionado: setSelecionado,
+        modelos: setModelos,
+        placa: setPlaca,
+        ano: setAno,
+        marca: setMarca
+
+      }
+
+      if (id == 0) {
+        let r = await axios.post('http://localhost:5000/veiculo', Veiculos)
+        alert('veiculo cadastrado')
+      }
+
+      else {
+        let r = await axios.put('http://localhost:5000/veiculo', Veiculos)
+        alert('Veiculo foi altearado')
+      }
+
+      buscarVeiculos()
+
+      setModelos('');
+      setPlaca('');
+      setAno('');
+      setMarca('');
+      setSelecionado(0);
+      setId(0)
+
+    } catch (err) {
+      setErro(err.response.data.erro)
+    }
+  }
+
+  async function buscarVeiculos() {
+    let r = await axios.get('http://localhost:5000/veiculo?busca=' + busca);
+    setListaVeiculos(r.data);
+  }
+
+
 
   useEffect(() => {
     //
@@ -26,7 +86,7 @@ function App() {
   }, [])
 
 
-  
+
 
   return (
     <div className="App">
@@ -85,48 +145,86 @@ function App() {
                 <select id='veiculo' name='veiculo' value={tipoSelecionado} onChange={e => setSelecionado(e.target.value)}>
                   <option value={0}> Selecione </option>
                   {tipos.map(item =>
-                    
-                      <option value={item.id}> {item.tipo} </option>
-                    )}
+
+                    <option value={item.id}> {item.tipo} </option>
+                  )}
                 </select>
               </div>
 
               <div className='input'>
-                <h1>EMAIL</h1>
-                <input type='text' />
+                <h1>Modelo</h1>
+                <input type='text' value={modelos} onChange={e => setModelos(e.target.value)} />
               </div>
 
               <div className='input'>
-                <h1>TELEFONE</h1>
-                <input type='text' />
+                <h1>Marca</h1>
+                <input type='text' value={marca} onChange={e => setMarca(e.target.value)} />
               </div>
 
               <div className='input'>
-                <h1>CPF</h1>
-                <input type='text' />
+                <h1>Ano</h1>
+                <input type='text' value={ano} onChange={e => setAno(e.target.value)} />
               </div>
 
               <div className='input'>
-                <h1>CNH</h1>
-                <input type='text' />
+                <h1>Placa</h1>
+                <input type='text' value={placa} onChange={e => setPlaca(e.target.value)} />
               </div>
 
 
-              <button> Salvar </button>
+              <button onClick={Salvar}>
+                {id == 0 ? 'Salvar' : 'Alterar'}
+              </button>
             </div>
 
 
             <div className='cubo'>
-              <h1>Lista de Clientes</h1>
+              <h1>Lista de Veiculos</h1>
               <div className='input2'>
                 <div>
-                  <h1>Nome</h1>
-                  <input type='text' />
+                  <h1>Modelo, Marca, Placa</h1>
+                  <input type='text' value={busca} onChange={e => setBusca(e.target.value)} />
                 </div>
 
-                <img src='../assets/img/busca.svg' />
+                <img src='../assets/img/busca.svg' onClick={buscarVeiculos} />
 
               </div>
+
+<table>
+              <colgroup>
+                <col style={{ width: 30 + '%' }} />
+                <col style={{ width: 15 + '%' }} />
+                <col style={{ width: 12 + '%' }} />
+                <col style={{ width: 12 + '%' }} />
+                <col style={{ width: 20 + '%' }} />
+              </colgroup>
+              <thead>
+                <tr>
+
+                  <th>Modelo</th>
+                  <th>Marca</th>
+                  <th>Ano</th>
+                  <th>Tipo</th>
+                  <th>placa</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listaVeiculos.map(item =>
+                  <tr>
+                    <td>{item.modelo}</td>
+                    <td>{item.marca}</td>
+                    <td>{item.ano}</td>
+                    <td>{item.tipo}</td>
+                    <td>{item.placa}</td>
+                    <td className='btns' style={{ display: 'flex', height: 20 }}>
+                      <i class="fa-regular fa-pen-to-square" onClick={() => alterVeiculo(item)}></i>
+                      <i class="fa-solid fa-delete-left" onClick={() => removerVeiculo(item.id)}></i>
+                    </td>
+                  </tr>  
+                )}
+                
+              </tbody>
+            </table>
 
             </div>
 
